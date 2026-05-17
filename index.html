@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>AI Is Evolving — Are You?</title>
+<title>AI Is Evolving. Are You?</title>
 <meta name="description" content="A plain-language companion to the position paper 'Human Evolution Should be Treated as a Goal in Human-AI Co-Evolution.' Four phases of how we use AI, what quietly breaks at each, and what to practice instead." />
 <style>
   :root {
@@ -92,11 +92,11 @@
     background: var(--clay);
   }
 
-  /* TWO-COLUMN HERO: text on left, big figure on right */
+  /* TWO-COLUMN HERO: roomier text on left, smaller figure on right */
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 64px;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 80px;
     align-items: start;
   }
   @media (max-width: 1080px) {
@@ -112,7 +112,7 @@
     letter-spacing: -0.02em;
     color: var(--slate);
     margin: 0 0 18px;
-    max-width: 16ch;
+    max-width: 18ch;
   }
   h1.title em { color: var(--clay); font-style: italic; }
   .subtitle {
@@ -122,14 +122,14 @@
     line-height: 1.32;
     color: var(--g500);
     margin: 0 0 32px;
-    max-width: 38ch;
+    max-width: 46ch;
   }
   .intro {
     font-size: 16.5px;
     line-height: 1.65;
     color: var(--g700);
     margin: 0 0 16px;
-    max-width: 44ch;
+    max-width: 58ch;
   }
   .intro:last-of-type { margin-bottom: 24px; }
   .byline {
@@ -140,7 +140,7 @@
     letter-spacing: .08em;
     text-transform: uppercase;
     line-height: 1.6;
-    max-width: 48ch;
+    max-width: 56ch;
   }
   .byline a { color: var(--g500); text-decoration-color: var(--g300); }
 
@@ -698,16 +698,16 @@
 
       <!-- LEFT: text column -->
       <div class="hero-text">
-        <h1 class="title">AI Is Evolving — <em>Are You?</em></h1>
+        <h1 class="title">AI Is Evolving. <em>Are You?</em></h1>
         <p class="subtitle">When the smartest tool in the room is slowly making you a worse thinker.</p>
 
-        <p class="intro">A friend uses ChatGPT to draft a tricky email to her boss. She skims it, hits send, feels efficient. The reply comes back confused. She reads her own email — really reads it, for the first time — and realizes she doesn't quite agree with what she sent under her own name.</p>
+        <p class="intro">A friend uses ChatGPT to draft a tricky email to her boss. She skims it, hits send, feels efficient. The reply comes back confused. She reads her own email, really reads it for the first time, and realizes she doesn't quite agree with what she sent under her own name.</p>
 
-        <p class="intro">This is the quiet pattern of modern AI use. We ask. We accept. We ship. Each moment feels like a small win. Stack enough together, and the muscles we used to flex — judging, verifying, paying attention — get a little weaker each time we skip them.</p>
+        <p class="intro">This is the quiet pattern of modern AI use. We ask. We accept. We ship. Each moment feels like a small win. Stack enough together, and the muscles we used to flex (judging, verifying, paying attention) get a little weaker each time we skip them.</p>
 
         <div class="byline">
           A plain-language companion to <a href="paper.md">our position paper</a><br>
-          "Human Evolution Should Be Treated as a Goal in Human–AI Co-Evolution"
+          "Human Evolution Should Be Treated as a Goal in Human-AI Co-Evolution"
         </div>
       </div>
 
@@ -715,7 +715,7 @@
       <figure class="hero-figure">
         <div class="figure-head">
           <span class="label">Our view · Figure 1</span>
-          <span class="fig-title">Human Evolution as a <strong>goal</strong> of Human–AI Co-Evolution</span>
+          <span class="fig-title">Human Evolution as a <strong>goal</strong> of Human-AI Co-Evolution</span>
         </div>
 
         <svg class="hero-svg" viewBox="0 0 1000 680" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -892,34 +892,16 @@
           </g>
 
           <!-- ============ RIGHT LOOP: BETTER AI UTILIZATION ============ -->
-          <path d="M 900 290 C 980 290, 980 410, 900 410"
+          <path d="M 900 296 C 950 296, 950 404, 900 404"
                 fill="none" stroke="#d97757" stroke-width="3"
                 stroke-linecap="round" marker-end="url(#arrClay)"/>
 
-          <circle cx="976" cy="350" r="2.8" fill="#d97757" opacity="0.6"/>
-
-          <!-- small screen + finger -->
-          <g transform="translate(948, 325)">
-            <rect x="0" y="0" width="44" height="32" rx="4" fill="#ffffff" stroke="#d97757" stroke-width="2"/>
-            <g transform="translate(13, 14)" stroke="#d97757" stroke-width="1.5" stroke-linecap="round" fill="none">
-              <line x1="0" y1="-5" x2="0" y2="5"/>
-              <line x1="-5" y1="0" x2="5" y2="0"/>
-              <line x1="-3.5" y1="-3.5" x2="3.5" y2="3.5"/>
-              <line x1="-3.5" y1="3.5" x2="3.5" y2="-3.5"/>
-            </g>
-            <rect x="18" y="32" width="8" height="4" fill="#d97757"/>
-            <rect x="12" y="36" width="20" height="3" rx="1" fill="#d97757"/>
-            <g transform="translate(28, 4)">
-              <path d="M 0 8 L 0 0 L 4 0 L 4 8 L 8 8 L 8 14 L 0 14 z" fill="#d97757"/>
-            </g>
-          </g>
-
-          <!-- vertical label -->
+          <!-- rotated loop label, tucked inside the viewBox so it never clips -->
           <text x="0" y="0" text-anchor="middle"
                 font-family="system-ui, -apple-system, sans-serif"
-                font-size="20" font-weight="700" fill="#d97757"
+                font-size="17" font-weight="700" fill="#d97757"
                 letter-spacing="0.02em"
-                transform="translate(995, 350) rotate(90)">
+                transform="translate(972, 350) rotate(90)">
             Better AI Utilization
           </text>
 
@@ -930,7 +912,7 @@
           <text x="500" y="624" text-anchor="middle"
                 font-family="ui-serif, Georgia, 'Times New Roman', serif"
                 font-style="italic" font-size="24" fill="#3d3d3a">
-            Human evolution drives <tspan fill="#d97757" font-weight="500">better AI usage</tspan> — and <tspan fill="#187077" font-weight="500">better AI</tspan>.
+            Human evolution drives <tspan fill="#d97757" font-weight="500">better AI usage</tspan>, and <tspan fill="#187077" font-weight="500">better AI</tspan>.
           </text>
         </svg>
       </figure>
@@ -966,13 +948,13 @@
         <h2>The conversation we're not having</h2>
       </div>
       <div class="sec-intro">
-        <p>Most of what you hear about AI focuses on one side of the equation: making the AI smarter. <strong>We think this is the wrong place to put all the attention.</strong> Our position paper argues that <em>human evolution should be treated as a goal of AI progress, not an afterthought</em>. As AI takes on more of our work, the skills we need to use it well don't appear automatically — and the same automation that makes us productive often removes our chances to practice them.</p>
+        <p>Most of what you hear about AI focuses on one side of the equation: making the AI smarter. <strong>We think this is the wrong place to put all the attention.</strong> Our position paper argues that <em>human evolution should be treated as a goal of AI progress, not an afterthought</em>. As AI takes on more of our work, the skills we need to use it well don't appear automatically. The same automation that makes us productive often removes our chances to practice them.</p>
       </div>
 
       <blockquote class="pull">Better humans make better AI. The loop runs in both directions.</blockquote>
 
       <div class="body-text">
-        <p>When you silently accept a polished-but-wrong AI answer, that's not just a personal cost. The signal — <em>"human approved"</em> — flows into how the next generation of AI is trained. Models learn that confident, agreeable answers get rewarded. The result is sycophantic AI taught by humans who stopped checking.</p>
+        <p>When you silently accept a polished-but-wrong AI answer, that's not just a personal cost. The signal, <em>"human approved"</em>, flows into how the next generation of AI is trained. Models learn that confident, agreeable answers get rewarded. The result is sycophantic AI taught by humans who stopped checking.</p>
         <p>The uncomfortable question: as AI gets dramatically more capable, are <em>we</em> getting better at using it? Or are we quietly becoming worse?</p>
       </div>
     </section>
@@ -981,7 +963,7 @@
     <section id="sec-phases">
       <div class="sec-head">
         <span class="idx">02</span>
-        <h2>Four phases of using AI — and where things quietly break</h2>
+        <h2>Four phases of using AI, and where things quietly break</h2>
       </div>
       <div class="sec-intro">
         <p>We mapped four phases of how people actually use AI, based on how much work you hand over. Each phase brings new empowerment, a new risk, and a different skill to practice. The pattern repeats: you gain capability, you lose practice, and the underlying ability fades unless you protect it.</p>
@@ -995,7 +977,7 @@
           <p class="label">You ask, it answers.</p>
           <dl>
             <dt>Scenario</dt>
-            <dd>Definitions, summaries, "explain it like I'm five" — knowledge that used to take a search session or a phone call to a colleague.</dd>
+            <dd>Definitions, summaries, "explain it like I'm five." Knowledge that used to take a search session or a phone call to a colleague.</dd>
             <dt>What breaks</dt>
             <dd><strong>Your reasoning gets rusty.</strong> It's so easy to get an answer that you stop forming your own first. You drift toward passive acceptance.</dd>
             <dt>Practice</dt>
@@ -1014,13 +996,13 @@
             <dt>Scenario</dt>
             <dd>Draft emails, code snippets, slide decks, first-pass analyses. AI moves from answering questions to producing work you check and ship.</dd>
             <dt>What breaks</dt>
-            <dd><strong>Verification goes shallow.</strong> Polished output looks right. You check less and start trusting surface signals — length, formatting, confident tone — instead of substance.</dd>
+            <dd><strong>Verification goes shallow.</strong> Polished output looks right. You check less and start trusting surface signals (length, formatting, confident tone) instead of substance.</dd>
             <dt>Practice</dt>
-            <dd><strong>Evaluative expertise.</strong> Decide what tests an output must pass <em>before</em> you generate it. Ask for two or three versions — if they disagree, look harder.</dd>
+            <dd><strong>Evaluative expertise.</strong> Decide what tests an output must pass <em>before</em> you generate it. Ask for two or three versions, and if they disagree, look harder.</dd>
             <dt>AI's job</dt>
             <dd>Stop hiding the work behind a polished draft. Show assumptions. Point at where it's most likely wrong. Surface disagreements across attempts.</dd>
           </dl>
-          <div class="stat"><span class="num">40%</span> &nbsp;of code written with GitHub Copilot in one study had security vulnerabilities — and developers rated their Copilot work as <em>more</em> secure than their solo work. <span style="color:var(--g500); font-size:11px; font-family:var(--mono); letter-spacing:.04em;">Perry et al., 2023; Pearce et al., 2022</span></div>
+          <div class="stat"><span class="num">40%</span> &nbsp;of code written with GitHub Copilot in one study had security vulnerabilities. Developers rated their Copilot work as <em>more</em> secure than their solo work. <span style="color:var(--g500); font-size:11px; font-family:var(--mono); letter-spacing:.04em;">Perry et al., 2023; Pearce et al., 2022</span></div>
         </article>
 
         <article class="phase">
@@ -1054,24 +1036,24 @@
             <dt>AI's job</dt>
             <dd>Summarize coordination decisions in plain language. Preserve audit trails linking actions to the original goal. Flag high-risk branches.</dd>
           </dl>
-          <div class="stat">Phase 4 is forward-looking. The risk is structural: <em>outcome-only feedback</em> can't tell whether a failure came from one weak agent or from bad orchestration — so the coordination layer stays under-improved.</div>
+          <div class="stat">Phase 4 is forward-looking. The risk is structural: <em>outcome-only feedback</em> can't tell whether a failure came from one weak agent or from bad orchestration, so the coordination layer stays under-improved.</div>
         </article>
       </div>
 
       <div class="takeaway">
         <span class="lbl">The pattern that repeats</span>
-        Each phase gives you more leverage and removes a chance to practice the skill that makes the leverage safe. The skill doesn't fall off a cliff — it thins out. Then one day you notice you're trusting an answer because it looks confident, not because you checked.
+        Each phase gives you more leverage and removes a chance to practice the skill that makes the leverage safe. The skill doesn't fall off a cliff. It thins out. Then one day you notice you're trusting an answer because it looks confident, not because you checked.
       </div>
     </section>
 
-    <!-- ============== SECTION 03 — INTERACTIVE HEATMAP ============== -->
+    <!-- ============== SECTION 03 : INTERACTIVE HEATMAP ============== -->
     <section id="sec-map">
       <div class="sec-head">
         <span class="idx">03</span>
         <h2>Where are you on this map?</h2>
       </div>
       <div class="sec-intro">
-        <p>Not every job sits in the same phase. A radiologist reading scans with AI lives in Phase 1–2. A software engineer running coding agents is deep in Phase 3. A researcher coordinating autonomous research systems brushes against Phase 4.</p>
+        <p>Not every job sits in the same phase. A radiologist reading scans with AI lives in Phase 1 or 2. A software engineer running coding agents is deep in Phase 3. A researcher coordinating autonomous research systems brushes against Phase 4.</p>
         <p>We classified <strong>341 white-collar occupations</strong> across these phases using two public adoption datasets and an index of underlying AI capability. <strong>Click any cell</strong> to see the occupations in that bucket.</p>
       </div>
 
@@ -1096,11 +1078,11 @@
       </div>
 
       <div class="body-text" style="margin-top:32px;">
-        <p>A quick way to locate yourself if your exact role isn't listed: <em>what's the largest unit of work you currently hand to AI without checking each step?</em> A sentence? A document? A whole task? A project farmed out across agents? That's your phase — and that's the skill being practiced less, every time you hand off another piece.</p>
+        <p>A quick way to locate yourself if your exact role isn't listed: <em>what's the largest unit of work you currently hand to AI without checking each step?</em> A sentence? A document? A whole task? A project farmed out across agents? That's your phase, and it's the skill being practiced less every time you hand off another piece.</p>
       </div>
     </section>
 
-    <!-- ============== SECTION 04 — HABITS ============== -->
+    <!-- ============== SECTION 04 : HABITS ============== -->
     <section id="sec-habits">
       <div class="sec-head">
         <span class="idx">04</span>
@@ -1124,26 +1106,26 @@
         <article class="habit">
           <div class="num">03</div>
           <h4>Disconnect</h4>
-          <p>Once a week, do a task you usually delegate — entirely without AI. Not because AI is bad, but because this is how you check whether the underlying skill is still there.</p>
+          <p>Once a week, do a task you usually delegate, entirely without AI. Not because AI is bad, but because this is how you check whether the underlying skill is still there.</p>
         </article>
       </div>
 
       <div class="takeaway">
         <span class="lbl">Why this works</span>
-        These aren't anti-AI practices — they're what makes pro-AI use sustainable. Each one carves out a small space where you do work AI would otherwise absorb, so the underlying capability stays alive when AI is wrong or unavailable.
+        These aren't anti-AI practices. They're what makes pro-AI use sustainable. Each one carves out a small space where you do work AI would otherwise absorb, so the underlying capability stays alive when AI is wrong or unavailable.
       </div>
     </section>
 
-    <!-- ============== SECTION 05 — FUTURE ============== -->
+    <!-- ============== SECTION 05 : FUTURE ============== -->
     <section id="sec-future">
       <div class="sec-head">
         <span class="idx">05</span>
         <h2>The future we're betting on</h2>
       </div>
       <div class="body-text">
-        <p>There's a version of the future where AI gets dramatically more capable and humans dramatically less so — where we drift into a world we no longer understand and can't course-correct. It's the natural endpoint of a feedback loop we're already running.</p>
+        <p>There's a version of the future where AI gets dramatically more capable and humans dramatically less so, where we drift into a world we no longer understand and can't course-correct. It's the natural endpoint of a feedback loop we're already running.</p>
         <p>There's another version. In it, AI runs fast and humans see far. AI handles volume and humans handle values. Both sides grow into roles that fit together: academia teaches phase-specific skills, industry builds review pipelines and audit trails into how agents are deployed, society sets rules so "human oversight" matches what humans can realistically see.</p>
-        <p>That future doesn't happen by accident. It depends on humans who keep growing, not just the tools they build. The good news: it starts the next time you open a chat window — and pause for thirty seconds before you ask.</p>
+        <p>That future doesn't happen by accident. It depends on humans who keep growing, not just the tools they build. The good news: it starts the next time you open a chat window, when you pause for thirty seconds before you ask.</p>
       </div>
 
       <blockquote class="pull">AI runs fast. Humans see far. The future depends on both.</blockquote>
@@ -1177,9 +1159,9 @@ const PHASES = [
 ];
 
 const PHASE_DESC = {
-  p1:  { name: "Phase 1 (Tool, stable)",          blurb: "AI is used as a <strong>tool</strong> — knowledge access, look-ups, explanations. Humans still execute the work." },
+  p1:  { name: "Phase 1 (Tool, stable)",          blurb: "AI is used as a <strong>tool</strong>: knowledge access, look-ups, explanations. Humans still execute the work." },
   p2e: { name: "Phase 2 Emerging",                blurb: "Currently Phase 1, but research signals are pushing this work toward AI <strong>assisting in production</strong>." },
-  p2:  { name: "Phase 2 (Assistant, stable)",     blurb: "AI is used as an <strong>assistant</strong> — producing drafts, snippets, and partial artifacts that humans verify and ship." },
+  p2:  { name: "Phase 2 (Assistant, stable)",     blurb: "AI is used as an <strong>assistant</strong>: producing drafts, snippets, and partial artifacts that humans verify and ship." },
   p3e: { name: "Phase 3 Emerging",                blurb: "Currently Phase 2, but frontier systems are pushing this work toward <strong>autonomous workflow execution</strong>." },
   p3:  { name: "Phase 3 (Executor, stable)",      blurb: "AI <strong>runs whole workflows</strong> end-to-end. Humans set goals and supervise, not execute." },
   p4e: { name: "Phase 4 Emerging",                blurb: "Currently Phase 3, but managed-agent architectures are pushing this work toward <strong>system-level coordination</strong>." },
