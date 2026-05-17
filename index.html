@@ -829,8 +829,8 @@
               <line x1="9" y1="-9"  x2="12" y2="-12" stroke="#d97757" stroke-width="2.2" stroke-linecap="round"/>
             </g>
 
-            <!-- idea lamp -->
-            <g transform="translate(88, 22)">
+            <!-- idea lamp (offset to upper-left so it never overlaps the head) -->
+            <g transform="translate(44, 46)">
               <path d="M 0 -8 C -8 -8, -10 0, -6 6 L -5 12 L 5 12 L 6 6 C 10 0, 8 -8, 0 -8 z"
                     fill="#fff6d6" stroke="#d97757" stroke-width="2" stroke-linejoin="round"/>
               <rect x="-5" y="13" width="10" height="3" rx="1" fill="#d97757"/>
@@ -844,8 +844,6 @@
 
             <!-- motion sparkles -->
             <g fill="#d97757" opacity="0.7">
-              <circle cx="40" cy="40" r="2"/>
-              <circle cx="32" cy="70" r="1.6"/>
               <circle cx="46" cy="98" r="1.8"/>
               <circle cx="155" cy="105" r="1.8"/>
               <circle cx="190" cy="80" r="2"/>
@@ -899,9 +897,9 @@
           <!-- rotated loop label, tucked inside the viewBox so it never clips -->
           <text x="0" y="0" text-anchor="middle"
                 font-family="system-ui, -apple-system, sans-serif"
-                font-size="17" font-weight="700" fill="#d97757"
+                font-size="23" font-weight="700" fill="#d97757"
                 letter-spacing="0.02em"
-                transform="translate(972, 350) rotate(90)">
+                transform="translate(966, 350) rotate(90)">
             Better AI Utilization
           </text>
 
