@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Is Evolving — Are You?</title>
+<meta name="description" content="A plain-language companion to the position paper 'Human Evolution Should be Treated as a Goal in Human-AI Co-Evolution.' Four phases of how we use AI, what quietly breaks at each, and what to practice instead." />
+<style>
+  :root {
+    --ivory:#faf9f5;
+    --paper:#ffffff;
+    --slate:#141413;
+    --g700:#3d3d3a;
+    --g500:#87867f;
+    --g300:#d1cfc5;
+    --g200:#e6e3da;
+    --g100:#f0eee6;
+    --oat:#e7e3d4;
+    --clay:#d97757;
+    --clay-d:#b85c3e;
+    --clay-l:#f4dac9;
+    --olive:#788c5d;
+    --olive-l:#d9dfc9;
+    --teal:#187077;
+    --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--g700);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection { background: var(--clay-l); color: var(--slate); }
+  a {
+    color: var(--clay);
+    text-decoration: underline;
+    text-decoration-color: var(--oat);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color .15s ease;
+  }
+  a:hover { text-decoration-color: var(--clay); }
+
+  /* ---------- layout ---------- */
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px 140px;
+  }
+  @media (min-width: 1180px) {
+    .wrap {
+      max-width: 1400px;
+      display: grid;
+      grid-template-columns: 196px minmax(0, 1fr);
+      column-gap: 56px;
+    }
+    .masthead, .footer, .toc-mobile { grid-column: 1 / -1; }
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    padding: 80px 0 48px;
+    border-bottom: 1.5px solid var(--g300);
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--g500);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--clay);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  @media (min-width: 920px) {
+    .hero-grid { grid-template-columns: 1fr 320px; gap: 56px; }
+  }
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(36px, 4.8vw, 56px);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
+    color: var(--slate);
+    margin: 0 0 20px;
+    max-width: 18ch;
+  }
+  h1.title em { color: var(--clay); font-style: italic; }
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.35;
+    color: var(--g500);
+    margin: 0 0 28px;
+    max-width: 40ch;
+  }
+  .intro {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--g700);
+    max-width: 56ch;
+    margin: 0 0 14px;
+  }
+  .intro:last-child { margin-bottom: 0; }
+  .byline {
+    margin-top: 28px;
+    color: var(--g500);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .byline a { color: var(--g500); text-decoration-color: var(--g300); }
+
+  /* hero diagram card */
+  .hero-card {
+    background: var(--paper);
+    border: 1px solid var(--g200);
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+    position: relative;
+  }
+  .hero-card .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--g500);
+    margin-bottom: 12px;
+  }
+  .hero-svg { width: 100%; height: auto; display: block; }
+
+  /* ---------- side TOC ---------- */
+  nav.side-toc {
+    display: none;
+  }
+  @media (min-width: 1180px) {
+    nav.side-toc {
+      display: block;
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 12px;
+      max-height: calc(100vh - 56px);
+      overflow-y: auto;
+    }
+    nav.side-toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav.side-toc li {
+      border-left: 2px solid var(--g300);
+      padding: 6px 0 6px 14px;
+      margin: 2px 0;
+    }
+    nav.side-toc a {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--g500);
+      text-decoration: none;
+    }
+    nav.side-toc a:hover { color: var(--slate); }
+    nav.side-toc li.active { border-left-color: var(--clay); }
+    nav.side-toc li.active a { color: var(--clay); }
+  }
+
+  /* mobile TOC chips */
+  .toc-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 36px;
+  }
+  .toc-mobile a {
+    border: 1px solid var(--g200);
+    background: var(--paper);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--g700);
+    text-decoration: none;
+  }
+  .toc-mobile a:hover { border-color: var(--clay); color: var(--clay); }
+  @media (min-width: 1180px) { .toc-mobile { display: none; } }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 76px; scroll-margin-top: 28px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+  .sec-head .idx {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: var(--g500);
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+  .sec-head h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.18;
+    color: var(--slate);
+    margin: 0;
+    letter-spacing: -0.012em;
+  }
+  .sec-intro {
+    margin-left: 50px;
+    max-width: 64ch;
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--g700);
+  }
+  .sec-intro p { margin: 0 0 14px; }
+  .sec-intro p:last-child { margin-bottom: 0; }
+
+  /* ---------- phase cards ---------- */
+  .phases {
+    margin-left: 50px;
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  @media (min-width: 880px) {
+    .phases { grid-template-columns: 1fr 1fr; gap: 22px; }
+  }
+  .phase {
+    background: var(--paper);
+    border: 1px solid var(--g200);
+    border-radius: 14px;
+    padding: 24px 26px 22px;
+    position: relative;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .phase:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(20,20,19,0.06);
+  }
+  .phase .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--clay);
+    background: var(--clay-l);
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .phase h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.22;
+    color: var(--slate);
+    margin: 0 0 4px;
+  }
+  .phase .label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--g500);
+    margin: 0 0 14px;
+  }
+  .phase dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    row-gap: 12px;
+    column-gap: 14px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .phase dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--g500);
+    padding-top: 4px;
+  }
+  .phase dd { margin: 0; color: var(--g700); }
+  .phase dd strong { color: var(--slate); }
+  .phase .stat {
+    background: var(--g100);
+    border-left: 3px solid var(--clay);
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-top: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--g700);
+  }
+  .phase .stat .num {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--clay-d);
+    font-size: 16px;
+  }
+
+  /* ---------- callouts ---------- */
+  .takeaway {
+    margin: 22px 0 0 50px;
+    background: var(--clay-l);
+    border-left: 3px solid var(--clay);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--slate);
+    max-width: 70ch;
+  }
+  .takeaway .lbl {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--clay-d);
+    margin-bottom: 4px;
+  }
+
+  .pull {
+    margin: 30px 0 30px 50px;
+    padding: 0 0 0 24px;
+    border-left: 3px solid var(--clay);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--slate);
+    max-width: 36ch;
+  }
+
+  /* ---------- heatmap ---------- */
+  .heatmap-wrap {
+    margin: 32px 0 0 50px;
+    background: var(--paper);
+    border: 1px solid var(--g200);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+  }
+  .heatmap-caption {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--g500);
+    margin-bottom: 18px;
+  }
+  .heatmap-caption .n {
+    color: var(--clay);
+    font-weight: 600;
+  }
+  .heatmap {
+    display: grid;
+    grid-template-columns: 200px repeat(6, 1fr);
+    gap: 4px;
+    align-items: stretch;
+  }
+  .hm-header {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .06em;
+    color: var(--g700);
+    text-align: center;
+    padding: 8px 4px 10px;
+    font-weight: 500;
+  }
+  .hm-header .small {
+    display: block;
+    font-size: 9px;
+    color: var(--g500);
+    margin-top: 2px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .hm-row-label {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--slate);
+    line-height: 1.25;
+    padding: 8px 14px 8px 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+  }
+  .hm-row-label .n {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--g500);
+    margin-top: 3px;
+    letter-spacing: .04em;
+  }
+  .hm-cell {
+    border: 0;
+    border-radius: 4px;
+    padding: 0;
+    height: 56px;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--slate);
+    transition: transform .12s ease, box-shadow .12s ease, outline-color .12s ease;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    position: relative;
+  }
+  .hm-cell:hover {
+    transform: scale(1.05);
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(20,20,19,0.12);
+  }
+  .hm-cell.active {
+    outline-color: var(--slate);
+    z-index: 3;
+  }
+  .hm-cell.zero { color: var(--g300); cursor: default; }
+  .hm-cell.zero:hover { transform: none; box-shadow: none; }
+
+  .hm-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .hm-legend .gradient {
+    flex: 1;
+    min-width: 200px;
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #fff5f0 0%, #fcc5a8 35%, #e88a5f 65%, #b04020 100%);
+  }
+  .hm-legend .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--g500);
+  }
+
+  /* detail panel */
+  .hm-detail {
+    margin-top: 22px;
+    background: var(--g100);
+    border-radius: 10px;
+    padding: 18px 22px;
+    min-height: 80px;
+    transition: opacity .2s ease;
+  }
+  .hm-detail.empty {
+    color: var(--g500);
+    font-style: italic;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
+  }
+  .hm-detail-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .hm-detail-head .group {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--slate);
+  }
+  .hm-detail-head .phase-tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--clay);
+    background: var(--clay-l);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .hm-detail-head .count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--g500);
+    letter-spacing: .04em;
+  }
+  .hm-detail-summary {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--g700);
+    margin: 0 0 12px;
+    max-width: 70ch;
+  }
+  .hm-detail-summary strong { color: var(--slate); }
+  .hm-detail ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  @media (min-width: 700px) {
+    .hm-detail ul { grid-template-columns: 1fr 1fr; column-gap: 24px; }
+  }
+  @media (min-width: 1000px) {
+    .hm-detail ul { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .hm-detail li {
+    font-size: 13px;
+    color: var(--g700);
+    padding: 3px 0 3px 12px;
+    border-left: 2px solid var(--g200);
+    line-height: 1.4;
+  }
+  .hm-detail .none {
+    font-style: italic;
+    color: var(--g500);
+    font-size: 13px;
+  }
+
+  @media (max-width: 880px) {
+    .heatmap {
+      grid-template-columns: 110px repeat(6, 1fr);
+      gap: 3px;
+    }
+    .hm-row-label { font-size: 11px; padding-right: 8px; }
+    .hm-cell { height: 44px; font-size: 14px; }
+    .hm-header { font-size: 10px; }
+    .hm-header .small { font-size: 8px; }
+  }
+
+  /* ---------- habits ---------- */
+  .habits {
+    margin-left: 50px;
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  @media (min-width: 760px) {
+    .habits { grid-template-columns: repeat(3, 1fr); }
+  }
+  .habit {
+    background: var(--paper);
+    border: 1px solid var(--g200);
+    border-radius: 12px;
+    padding: 22px 22px 20px;
+  }
+  .habit .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 32px;
+    color: var(--clay);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .habit h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--slate);
+    margin: 0 0 8px;
+  }
+  .habit p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--g700);
+    margin: 0;
+  }
+
+  /* ---------- text content ---------- */
+  .body-text {
+    margin-left: 50px;
+    max-width: 64ch;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--g700);
+  }
+  .body-text p { margin: 0 0 14px; }
+  .body-text p:last-child { margin-bottom: 0; }
+  .body-text strong { color: var(--slate); }
+  .body-text em { color: var(--g700); }
+
+  /* ---------- footer ---------- */
+  .footer {
+    margin-top: 96px;
+    padding-top: 36px;
+    border-top: 1.5px solid var(--g300);
+    color: var(--g500);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .06em;
+    line-height: 1.7;
+  }
+  .footer a { color: var(--g700); text-decoration-color: var(--g300); }
+  .footer .row { display: flex; flex-wrap: wrap; gap: 14px 32px; }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 22px 100px; }
+    .masthead { padding: 56px 0 36px; }
+    .sec-head { gap: 12px; }
+    .sec-intro, .phases, .takeaway, .pull, .habits, .body-text, .heatmap-wrap { margin-left: 0; }
+    .phase dl { grid-template-columns: 84px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============== MASTHEAD ============== -->
+  <header class="masthead">
+    <div class="eyebrow">
+      Position paper companion · 2026 · Plain-language read · 12 min
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1 class="title">AI Is Evolving — <em>Are You?</em></h1>
+        <p class="subtitle">When the smartest tool in the room is slowly making you a worse thinker.</p>
+        <p class="intro">Picture this. A friend uses ChatGPT to write a tricky email to her boss. She skims it, hits send, feels efficient. The reply comes back confused. She reads her own email — really reads it, for the first time — and realizes she doesn't quite agree with what she sent under her own name.</p>
+        <p class="intro">This is the quiet pattern of modern AI use. We ask. We accept. We send. We code with copilots and ship what they suggest. We follow GPS without looking up. Each moment feels like a small win. Stack enough of them together, and something else starts happening: the muscles we used to flex — judging, verifying, paying attention — get a little weaker each time we skip them.</p>
+        <div class="byline">A plain-language companion to <a href="paper.md">our position paper</a> · "Human Evolution Should Be Treated as a Goal in Human-AI Co-Evolution"</div>
+      </div>
+      <aside class="hero-card" aria-hidden="true">
+        <div class="lbl">The loop, in one picture</div>
+        <svg class="hero-svg" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#d97757"/>
+            </marker>
+          </defs>
+          <!-- Human -->
+          <g transform="translate(40,40)">
+            <rect width="110" height="60" rx="10" fill="#fff" stroke="#d1cfc5" stroke-width="1.5"/>
+            <text x="55" y="28" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="14" fill="#141413" font-weight="500">Humans</text>
+            <text x="55" y="46" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#87867f" letter-spacing="0.5">USE / VERIFY / GOVERN</text>
+          </g>
+          <!-- AI -->
+          <g transform="translate(170,40)">
+            <rect width="110" height="60" rx="10" fill="#fff" stroke="#d1cfc5" stroke-width="1.5"/>
+            <text x="55" y="28" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="14" fill="#141413" font-weight="500">AI</text>
+            <text x="55" y="46" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#87867f" letter-spacing="0.5">ANSWERS / EXECUTES</text>
+          </g>
+          <!-- Outcome -->
+          <g transform="translate(105,200)">
+            <rect width="110" height="50" rx="10" fill="#f4dac9" stroke="#d97757" stroke-width="1.5"/>
+            <text x="55" y="22" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="13" fill="#141413" font-weight="500">Outcome</text>
+            <text x="55" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#b85c3e" letter-spacing="0.5">DEPLOYED / TRAINED ON</text>
+          </g>
+          <!-- arrows -->
+          <path d="M150,70 L170,70" fill="none" stroke="#d97757" stroke-width="1.8" marker-end="url(#arrow)"/>
+          <path d="M170,90 Q160,150 160,196" fill="none" stroke="#d97757" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="0"/>
+          <path d="M105,210 Q60,180 60,104" fill="none" stroke="#d97757" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="3 3"/>
+          <text x="265" y="155" font-family="ui-monospace, monospace" font-size="9" fill="#87867f" letter-spacing="0.5">EXECUTES</text>
+          <text x="20" y="160" font-family="ui-monospace, monospace" font-size="9" fill="#87867f" letter-spacing="0.5">FEEDS BACK</text>
+          <text x="155" y="135" font-family="ui-monospace, monospace" font-size="9" fill="#87867f" letter-spacing="0.5" text-anchor="middle">REQUEST</text>
+        </svg>
+      </aside>
+    </div>
+  </header>
+
+  <!-- ============== SIDE TOC ============== -->
+  <nav class="side-toc" aria-label="Table of contents">
+    <ol>
+      <li><a href="#sec-loop">01 · The loop nobody talks about</a></li>
+      <li><a href="#sec-phases">02 · Four phases of using AI</a></li>
+      <li><a href="#sec-map">03 · Where are you on this map?</a></li>
+      <li><a href="#sec-habits">04 · Three habits for this week</a></li>
+      <li><a href="#sec-future">05 · The future we're betting on</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============== CONTENT COLUMN ============== -->
+  <main>
+    <nav class="toc-mobile" aria-label="Table of contents">
+      <a href="#sec-loop">01 · Loop</a>
+      <a href="#sec-phases">02 · Four phases</a>
+      <a href="#sec-map">03 · Locate yourself</a>
+      <a href="#sec-habits">04 · Habits</a>
+      <a href="#sec-future">05 · Future</a>
+    </nav>
+
+    <!-- ============== SECTION 01 ============== -->
+    <section id="sec-loop">
+      <div class="sec-head">
+        <span class="idx">01</span>
+        <h2>The conversation we're not having</h2>
+      </div>
+      <div class="sec-intro">
+        <p>Most of what you hear about AI right now focuses on one side of the equation: making the AI smarter. Bigger models, better benchmarks, more autonomous agents, AI that can improve itself.</p>
+        <p><strong>We think this is the wrong place to put all our attention.</strong> In our recent position paper, we argue that <em>human evolution should be treated as a goal of AI progress, not an afterthought</em>. As AI takes on more of our work, the skills we need to use it well don't appear automatically. They have to be deliberately practiced. And the same automation that makes us more productive often quietly removes our chances to practice them.</p>
+      </div>
+
+      <blockquote class="pull">Better humans make better AI. Worse humans make worse AI. The loop runs in both directions.</blockquote>
+
+      <div class="body-text">
+        <p>There's a feedback loop here that almost nobody talks about. When you silently accept a polished-but-wrong AI answer, that's not just a personal cost. That signal — <em>"human approved"</em> — flows back into how the next generation of AI is trained. Models learn that confident, polished, agreeable answers get rewarded. The result is sycophantic AI that tells you what sounds good, taught by humans who stopped checking.</p>
+        <p>The uncomfortable question: as AI gets dramatically more capable, are <em>we</em> getting better at using it? Or are we quietly becoming worse?</p>
+      </div>
+    </section>
+
+    <!-- ============== SECTION 02 ============== -->
+    <section id="sec-phases">
+      <div class="sec-head">
+        <span class="idx">02</span>
+        <h2>Four phases of using AI — and where things quietly break</h2>
+      </div>
+      <div class="sec-intro">
+        <p>To make this concrete, we mapped four phases of how people actually use AI, based on how much work you hand over. Each phase brings a new kind of empowerment, a new kind of risk, and asks you to practice a different skill. The same pattern repeats across phases: you gain capability, you lose practice, and the underlying ability fades unless you protect it.</p>
+      </div>
+
+      <div class="phases">
+
+        <!-- Phase 1 -->
+        <article class="phase">
+          <span class="tag">Phase 1 · Tool</span>
+          <h3>Pocket Expert</h3>
+          <p class="label">You ask, it answers.</p>
+          <dl>
+            <dt>Scenario</dt>
+            <dd>Definitions, summaries, "explain it like I'm five," "what's the best way to…" — the AI gives you knowledge that used to take a search session, a textbook chapter, or a phone call to a colleague.</dd>
+            <dt>What breaks</dt>
+            <dd><strong>Your reasoning gets rusty.</strong> It's so easy to get an answer that you stop forming your own first. You drift toward passive acceptance.</dd>
+            <dt>Practice</dt>
+            <dd><strong>Critical thinking.</strong> Before you ask, predict the answer yourself. Then compare. The AI becomes feedback on your reasoning instead of a substitute for it.</dd>
+            <dt>AI's job</dt>
+            <dd>Show uncertainty. Surface the evidence it's working from. Ask what <em>you</em> already think before answering.</dd>
+          </dl>
+          <div class="stat"><span class="num">+18%</span> &nbsp;Doctors who trusted AI heavily accepted that many more <em>misdiagnoses</em> than doctors who trusted it less. <span style="color:var(--g500); font-size:11px; font-family:var(--mono); letter-spacing:.04em;">Srinivasan et al., 2025</span></div>
+        </article>
+
+        <!-- Phase 2 -->
+        <article class="phase">
+          <span class="tag">Phase 2 · Assistant</span>
+          <h3>Personal Assistant</h3>
+          <p class="label">You delegate, it produces.</p>
+          <dl>
+            <dt>Scenario</dt>
+            <dd>Draft emails, code snippets, slide decks, marketing copy, first-pass analyses. AI moves from answering questions to producing finished-looking work you check and ship.</dd>
+            <dt>What breaks</dt>
+            <dd><strong>Your verification goes shallow.</strong> Polished output <em>looks</em> right. Polish makes things feel right. So you check less, and you start trusting surface signals — length, formatting, confident tone — instead of the substance.</dd>
+            <dt>Practice</dt>
+            <dd><strong>Evaluative expertise.</strong> Decide what tests an output must pass <em>before</em> you generate it. Ask the AI for two or three different versions — if they disagree, that's a signal to look harder.</dd>
+            <dt>AI's job</dt>
+            <dd>Stop hiding its work behind a polished final draft. Show its assumptions. Point at where it's most likely to be wrong. Surface disagreements across attempts.</dd>
+          </dl>
+          <div class="stat"><span class="num">40%</span> &nbsp;of code written with GitHub Copilot in one study had security vulnerabilities — and developers rated their Copilot work as <em>more</em> secure than their solo work. <span style="color:var(--g500); font-size:11px; font-family:var(--mono); letter-spacing:.04em;">Perry et al., 2023; Pearce et al., 2022</span></div>
+        </article>
+
+        <!-- Phase 3 -->
+        <article class="phase">
+          <span class="tag">Phase 3 · Executor</span>
+          <h3>Autopilot</h3>
+          <p class="label">You set a goal, it runs a whole workflow.</p>
+          <dl>
+            <dt>Scenario</dt>
+            <dd>Coding agents that write, test, and revise entire features. Analytics agents that query databases, transform data, and report. Driving systems that handle most of the trip. You set the destination; the system does the doing.</dd>
+            <dt>What breaks</dt>
+            <dd><strong>Your oversight breaks down.</strong> Watching is harder than driving. You miss the intermediate cues you'd notice if you were operating the system yourself, and you're slower to intervene when things drift off-course.</dd>
+            <dt>Practice</dt>
+            <dd><strong>Metacognitive monitoring.</strong> Decide in advance where you'll check in. Identify the steps in the workflow that matter most and concentrate your attention there, instead of skimming everything thinly.</dd>
+            <dt>AI's job</dt>
+            <dd>Don't run silently to the finish. Surface progress. Pause at predefined checkpoints. Flag when confidence is low or actions cross a risk threshold.</dd>
+          </dl>
+          <div class="stat"><span class="num">97.4%</span> &nbsp;of users in one experiment with browser agents failed to interrupt the agent when it was about to accept a malicious privacy policy on their behalf. They were watching. They weren't really seeing. <span style="color:var(--g500); font-size:11px; font-family:var(--mono); letter-spacing:.04em;">Chen et al., 2025</span></div>
+        </article>
+
+        <!-- Phase 4 -->
+        <article class="phase">
+          <span class="tag">Phase 4 · Organization (near future)</span>
+          <h3>Orchestrator</h3>
+          <p class="label">You set direction; AI coordinates a system of agents.</p>
+          <dl>
+            <dt>Scenario</dt>
+            <dd>One AI breaks a goal into pieces, hands them to other AIs, manages their interactions, evaluates the results. This isn't widespread yet, but managed-agent architectures in research and software are starting to show it.</dd>
+            <dt>What breaks</dt>
+            <dd><strong>Governance becomes opaque.</strong> You see the final output. You don't see how the work was divided, who did what, where things were rerouted, or why pieces were redone. If something is off, you can't tell whether one component failed or the whole system was pointed at the wrong target.</dd>
+            <dt>Practice</dt>
+            <dd><strong>Systems thinking.</strong> Define rules before you deploy: what's forbidden, where the risk thresholds are, what gets escalated. Then audit <em>samples</em> of trajectories — you can't watch every step, but you can statistically check that the system is still behaving.</dd>
+            <dt>AI's job</dt>
+            <dd>Summarize coordination decisions in plain language. Preserve audit trails that connect what was done back to the original goal. Flag high-risk branches so humans can dig in where it matters.</dd>
+          </dl>
+          <div class="stat">Phase 4 is forward-looking. The risk is structural: <em>outcome-only feedback</em> can't tell you whether a failure came from one weak agent or from how the work was orchestrated — so the coordination layer stays under-improved.</div>
+        </article>
+      </div>
+
+      <div class="takeaway">
+        <span class="lbl">The pattern that repeats</span>
+        Each phase gives you more leverage and quietly removes a chance to practice the skill that makes that leverage safe. The skill doesn't fall off a cliff. It thins out. Then one day you notice you're trusting the answer because it looks confident, not because you checked.
+      </div>
+    </section>
+
+    <!-- ============== SECTION 03 — INTERACTIVE HEATMAP ============== -->
+    <section id="sec-map">
+      <div class="sec-head">
+        <span class="idx">03</span>
+        <h2>Where are you on this map?</h2>
+      </div>
+      <div class="sec-intro">
+        <p>Not every job sits in the same phase. A radiologist using AI to read scans lives mostly in Phase 1–2. A software engineer running coding agents is deep in Phase 3. A researcher coordinating autonomous research systems is starting to brush against Phase 4.</p>
+        <p>We classified <strong>341 white-collar occupations</strong> across these phases using two public adoption datasets and a third index of underlying AI capability. <strong>Click any cell</strong> to see the occupations in that bucket. The point isn't anxiety — it's awareness of which skill your work has reached.</p>
+      </div>
+
+      <div class="heatmap-wrap">
+        <div class="heatmap-caption">
+          AI integration phases across white-collar occupation groups · <span class="n">N = 341</span> · "<sup>E</sup>" marks <em>emerging</em> cohorts where frontier research is starting to push the work into the next phase
+        </div>
+
+        <div class="heatmap" id="heatmap" role="grid" aria-label="Phase distribution heatmap">
+          <!-- populated by JS -->
+        </div>
+
+        <div class="hm-legend">
+          <span class="lbl">Fewer occupations</span>
+          <div class="gradient" aria-hidden="true"></div>
+          <span class="lbl">More</span>
+        </div>
+
+        <div class="hm-detail empty" id="hm-detail" aria-live="polite">
+          Click any cell above to see the occupations in that bucket.
+        </div>
+      </div>
+
+      <div class="body-text" style="margin-top:32px;">
+        <p>A quick way to locate yourself if you can't find your exact role: <em>what's the largest unit of work you currently hand to AI without checking each step?</em> A sentence? A document? A whole task? A project with subtasks farmed out across agents? That's your phase.</p>
+        <p>Different phases ask for different skills. You don't have to master all four right now. You do need to know which one your work has already reached — because that's the skill that's quietly being practiced less, every time you hand off another piece.</p>
+      </div>
+    </section>
+
+    <!-- ============== SECTION 04 — HABITS ============== -->
+    <section id="sec-habits">
+      <div class="sec-head">
+        <span class="idx">04</span>
+        <h2>Three habits to start practicing this week</h2>
+      </div>
+      <div class="sec-intro">
+        <p>You don't have to wait for AI policy reform to start evolving. Three habits, small enough to start today, that map directly onto the skills above:</p>
+      </div>
+
+      <div class="habits">
+        <article class="habit">
+          <div class="num">01</div>
+          <h4>Pre-think</h4>
+          <p>Before you ask AI a question, take thirty seconds to write down what you think the answer is, or what you're uncertain about. Then ask. Then compare. This one habit alone changes your relationship with AI from "answer machine" to "thinking partner."</p>
+        </article>
+        <article class="habit">
+          <div class="num">02</div>
+          <h4>Critique</h4>
+          <p>Read every AI output once with the assumption that it's wrong somewhere. Where would the mistake be hiding? Polish is the enemy of careful reading — train yourself to look past it. The flaw is usually in the spot that sounds the most confident.</p>
+        </article>
+        <article class="habit">
+          <div class="num">03</div>
+          <h4>Disconnect</h4>
+          <p>Once a week, do a task you usually delegate to AI — entirely without it. Write the email. Debug the function. Plan the route. Not because AI is bad, but because this is how you check whether the underlying skill is still there.</p>
+        </article>
+      </div>
+
+      <div class="takeaway">
+        <span class="lbl">Why this works</span>
+        These aren't anti-AI practices. They're what makes pro-AI use sustainable. Each one carves out a small space where you do the work AI would otherwise absorb — just enough that the underlying capability stays alive and informs your judgment when AI is wrong, unavailable, or operating outside what it was built for.
+      </div>
+    </section>
+
+    <!-- ============== SECTION 05 — FUTURE ============== -->
+    <section id="sec-future">
+      <div class="sec-head">
+        <span class="idx">05</span>
+        <h2>The future we're betting on</h2>
+      </div>
+      <div class="body-text">
+        <p>There's a version of the future where AI gets dramatically more capable and humans get dramatically less so — where we drift into a world we no longer understand and can't course-correct. It's not a science-fiction scenario. It's the natural endpoint of a feedback loop we're already running, in which polish gets rewarded over correctness and the people who could push back are slowly losing the practice that would let them.</p>
+        <p>There's another version. In it, AI runs fast and humans see far. AI handles volume and humans handle values. AI does the work and humans direct it — not because that's how things have always been, but because both sides have grown into roles that fit together. Academia teaches phase-specific skills. Industry builds review pipelines, checkpoints, and audit trails into how agents are deployed. Society sets the rules so that what counts as "human oversight" actually matches what humans can realistically see.</p>
+        <p>That future doesn't happen by accident. It depends on humans who keep growing, not just the tools they build.</p>
+        <p>The good news: you're closer to it than you think. It starts the next time you open a chat window — and pause for thirty seconds before you ask.</p>
+      </div>
+
+      <blockquote class="pull">AI runs fast. Humans see far. The future depends on both.</blockquote>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="row">
+      <span>Based on the position paper "Human Evolution Should be Treated as a Goal in Human-AI Co-Evolution."</span>
+    </div>
+    <div class="row" style="margin-top:8px;">
+      <span><a href="paper.md">Read the full paper</a></span>
+      <span>·</span>
+      <span>Phase distribution: 341 occupations, derived from Anthropic Labor Report (2026), Microsoft AI Applicability (2025), and Eloundou et al. (2024)</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ============== Heatmap data ============== */
+const PHASES = [
+  { key: "p1",  label: "Phase 1",            sub: "stable" },
+  { key: "p2e", label: "Phase 2<sup>E</sup>", sub: "emerging" },
+  { key: "p2",  label: "Phase 2",            sub: "stable" },
+  { key: "p3e", label: "Phase 3<sup>E</sup>", sub: "emerging" },
+  { key: "p3",  label: "Phase 3",            sub: "stable" },
+  { key: "p4e", label: "Phase 4<sup>E</sup>", sub: "emerging" },
+];
+
+const PHASE_DESC = {
+  p1:  { name: "Phase 1 (Tool, stable)",          blurb: "AI is used as a <strong>tool</strong> — knowledge access, look-ups, explanations. Humans still execute the work." },
+  p2e: { name: "Phase 2 Emerging",                blurb: "Currently Phase 1, but research signals are pushing this work toward AI <strong>assisting in production</strong>." },
+  p2:  { name: "Phase 2 (Assistant, stable)",     blurb: "AI is used as an <strong>assistant</strong> — producing drafts, snippets, and partial artifacts that humans verify and ship." },
+  p3e: { name: "Phase 3 Emerging",                blurb: "Currently Phase 2, but frontier systems are pushing this work toward <strong>autonomous workflow execution</strong>." },
+  p3:  { name: "Phase 3 (Executor, stable)",      blurb: "AI <strong>runs whole workflows</strong> end-to-end. Humans set goals and supervise, not execute." },
+  p4e: { name: "Phase 4 Emerging",                blurb: "Currently Phase 3, but managed-agent architectures are pushing this work toward <strong>system-level coordination</strong>." },
+};
+
+/* Groups in heatmap row order (descending by total N) */
+const GROUPS = [
+  { key: "ch",  label: "Creative & Healthcare",     n: 73 },
+  { key: "bf",  label: "Business & Finance",        n: 62 },
+  { key: "ed",  label: "Education",                 n: 57 },
+  { key: "sls", label: "Science, Legal & Social",   n: 55 },
+  { key: "te",  label: "Tech & Engineering",        n: 54 },
+  { key: "oa",  label: "Office & Admin Support",    n: 40 },
+];
+
+/* Matrix: [group][phase] -> count.  Order matches GROUPS x PHASES. */
+const MATRIX = {
+  ch:  { p1: 28, p2e: 9, p2: 20, p3e: 8,  p3: 6,  p4e: 2  },
+  bf:  { p1: 1,  p2e: 7, p2: 21, p3e: 28, p3: 4,  p4e: 1  },
+  ed:  { p1: 3,  p2e: 0, p2: 16, p3e: 23, p3: 15, p4e: 0  },
+  sls: { p1: 1,  p2e: 7, p2: 19, p3e: 24, p3: 4,  p4e: 0  },
+  te:  { p1: 2,  p2e: 3, p2: 12, p3e: 20, p3: 4,  p4e: 13 },
+  oa:  { p1: 0,  p2e: 0, p2: 7,  p3e: 14, p3: 19, p4e: 0  },
+};
+
+/* Per-cell occupation lists — sourced from occupaction_layout.md */
+const OCCUPATIONS = {
+  ch: {
+    p1: ["Acupuncturists","Anesthesiologists","Cardiovascular Technologists and Technicians","Chiropractors","Dental Hygienists","Dentists, General","Dermatologists","Diagnostic Medical Sonographers","Exercise Physiologists","Healthcare Practitioners and Technical Workers, All Other","Magnetic Resonance Imaging Technologists","Nuclear Medicine Technologists","Nurse Anesthetists","Occupational Therapists","Ophthalmologists, Except Pediatric","Optometrists","Oral and Maxillofacial Surgeons","Orthodontists","Orthopedic Surgeons, Except Pediatric","Orthotists and Prosthetists","Pediatric Surgeons","Physician Assistants","Podiatrists","Prosthodontists","Radiation Therapists","Radiologic Technologists and Technicians","Registered Nurses","Respiratory Therapists"],
+    p2e: ["Athletic Trainers","Audiologists","Healthcare Diagnosing or Treating Practitioners, All Other","Neurologists","Pediatricians, General","Physicians, All Other","Recreational Therapists","Speech-Language Pathologists","Therapists, All Other"],
+    p2: ["Art Directors","Choreographers","Dietetic Technicians","Dietitians and Nutritionists","Fashion Designers","Film and Video Editors","General Internal Medicine Physicians","Graphic Designers","Music Directors and Composers","Nurse Midwives","Nurse Practitioners","Obstetricians and Gynecologists","Pharmacists","Photographers","Physical Therapists","Physicians, Pathologists","Producers and Directors","Radiologists","Special Effects Artists and Animators","Veterinarians"],
+    p3e: ["Broadcast Announcers and Radio Disc Jockeys","Commercial and Industrial Designers","Editors","Family Medicine Physicians","Genetic Counselors","Interior Designers","Psychiatrists","Set and Exhibit Designers"],
+    p3: ["Court Reporters and Simultaneous Captioners","Health Information Technologists and Medical Registrars","Medical Records Specialists","News Analysts, Reporters, and Journalists","Public Relations Specialists","Writers and Authors"],
+    p4e: ["Interpreters and Translators","Technical Writers"]
+  },
+  bf: {
+    p1: ["Industrial Production Managers"],
+    p2e: ["Administrative Services Managers","Chief Executives","Compensation and Benefits Managers","Food Service Managers","Human Resources Managers","Labor Relations Specialists","Postmasters and Mail Superintendents"],
+    p2: ["Agents and Business Managers of Artists, Performers, and Athletes","Architectural and Engineering Managers","Business Operations Specialists, All Other","Construction Managers","Financial Managers","Financial Specialists, All Other","General and Operations Managers","Human Resources Specialists","Lodging Managers","Management Analysts","Managers, All Other","Marketing Managers","Medical and Health Services Managers","Meeting, Convention, and Event Planners","Personal Financial Advisors","Personal Service Managers, All Other","Property, Real Estate, and Community Association Managers","Public Relations Managers","Purchasing Managers","Social and Community Service Managers","Training and Development Specialists"],
+    p3e: ["Advertising and Promotions Managers","Budget Analysts","Claims Adjusters, Examiners, and Investigators","Compensation, Benefits, and Job Analysis Specialists","Compliance Officers","Computer and Information Systems Managers","Cost Estimators","Credit Analysts","Credit Counselors","Education Administrators, Kindergarten through Secondary","Education Administrators, Postsecondary","Education and Childcare Administrators, Preschool and Daycare","Emergency Management Directors","Facilities Managers","Financial Examiners","Fundraisers","Funeral Home Managers","Gambling Managers","Insurance Appraisers, Auto Damage","Insurance Underwriters","Legislators","Loan Officers","Logisticians","Natural Sciences Managers","Sales Managers","Tax Examiners and Collectors, and Revenue Agents","Tax Preparers","Transportation, Storage, and Distribution Managers"],
+    p3: ["Accountants and Auditors","Financial Risk Specialists","Financial and Investment Analysts","Training and Development Managers"],
+    p4e: ["Market Research Analysts and Marketing Specialists"]
+  },
+  ed: {
+    p1: ["Kindergarten Teachers, Except Special Education","Preschool Teachers, Except Special Education","Special Education Teachers, Preschool"],
+    p2e: [],
+    p2: ["Career/Technical Education Teachers, Middle School","Career/Technical Education Teachers, Postsecondary","Career/Technical Education Teachers, Secondary School","Chemistry Teachers, Postsecondary","Elementary School Teachers, Except Special Education","Instructional Coordinators","Librarians and Media Collections Specialists","Middle School Teachers, Except Special and Career/Technical Education","Museum Technicians and Conservators","Nursing Instructors and Teachers, Postsecondary","Secondary School Teachers, Except Special and Career/Technical Education","Self-Enrichment Teachers","Special Education Teachers, All Other","Special Education Teachers, Middle School","Special Education Teachers, Secondary School","Teaching Assistants, Postsecondary"],
+    p3e: ["Adult Basic Education, Adult Secondary Education, and English as a Second Language Instructors","Agricultural Sciences Teachers, Postsecondary","Anthropology and Archeology Teachers, Postsecondary","Architecture Teachers, Postsecondary","Archivists","Area, Ethnic, and Cultural Studies Teachers, Postsecondary","Atmospheric, Earth, Marine, and Space Sciences Teachers, Postsecondary","Criminal Justice and Law Enforcement Teachers, Postsecondary","Economics Teachers, Postsecondary","Environmental Science Teachers, Postsecondary","Family and Consumer Sciences Teachers, Postsecondary","Farm and Home Management Educators","Forestry and Conservation Science Teachers, Postsecondary","Geography Teachers, Postsecondary","History Teachers, Postsecondary","Law Teachers, Postsecondary","Library Science Teachers, Postsecondary","Library Technicians","Physics Teachers, Postsecondary","Political Science Teachers, Postsecondary","Recreation and Fitness Studies Teachers, Postsecondary","Social Work Teachers, Postsecondary","Sociology Teachers, Postsecondary"],
+    p3: ["Art, Drama, and Music Teachers, Postsecondary","Biological Science Teachers, Postsecondary","Business Teachers, Postsecondary","Communications Teachers, Postsecondary","Computer Science Teachers, Postsecondary","Curators","Education Teachers, Postsecondary","Engineering Teachers, Postsecondary","English Language and Literature Teachers, Postsecondary","Foreign Language and Literature Teachers, Postsecondary","Health Specialties Teachers, Postsecondary","Mathematical Science Teachers, Postsecondary","Philosophy and Religion Teachers, Postsecondary","Psychology Teachers, Postsecondary","Tutors"],
+    p4e: []
+  },
+  sls: {
+    p1: ["Forensic Science Technicians"],
+    p2e: ["Conservation Scientists","Epidemiologists","Foresters","Mental Health and Substance Abuse Social Workers","Occupational Health and Safety Specialists","Occupational Health and Safety Technicians","Title Examiners, Abstractors, and Searchers"],
+    p2: ["Administrative Law Judges, Adjudicators, and Hearing Officers","Arbitrators, Mediators, and Conciliators","Astronomers","Biological Scientists, All Other","Chemists","Child, Family, and School Social Workers","Clergy","Directors, Religious Activities and Education","Educational, Guidance, and Career Counselors and Advisors","Geographers","Healthcare Social Workers","Judicial Law Clerks","Lawyers","Marriage and Family Therapists","Materials Scientists","Microbiologists","Paralegals and Legal Assistants","Psychologists, All Other","Sociologists"],
+    p3e: ["Animal Scientists","Anthropologists and Archeologists","Atmospheric and Space Scientists","Biochemists and Biophysicists","Clinical and Counseling Psychologists","Economists","Environmental Scientists and Specialists, Including Health","Food Scientists and Technologists","Geoscientists, Except Hydrologists and Geographers","Health Education Specialists","Historians","Hydrologists","Industrial-Organizational Psychologists","Life, Physical, and Social Science Technicians, All Other","Medical Scientists, Except Epidemiologists","Physical Scientists, All Other","Physicists","Probation Officers and Correctional Treatment Specialists","Rehabilitation Counselors","School Psychologists","Social Scientists and Related Workers, All Other","Soil and Plant Scientists","Urban and Regional Planners","Zoologists and Wildlife Biologists"],
+    p3: ["Judges, Magistrate Judges, and Magistrates","Political Scientists","Social Science Research Assistants","Survey Researchers"],
+    p4e: []
+  },
+  te: {
+    p1: ["Agricultural Engineers","Materials Engineers"],
+    p2e: ["Nuclear Engineers","Petroleum Engineers","Surveyors"],
+    p2: ["Aerospace Engineering and Operations Technologists and Technicians","Chemical Engineers","Computer Hardware Engineers","Computer Network Architects","Electrical Engineers","Electrical and Electronic Engineering Technologists and Technicians","Electro-Mechanical and Mechatronics Technologists and Technicians","Electronics Engineers, Except Computer","Engineering Technologists and Technicians, Except Drafters, All Other","Environmental Engineering Technologists and Technicians","Mechanical Engineering Technologists and Technicians","Operations Research Analysts"],
+    p3e: ["Actuaries","Aerospace Engineers","Architects, Except Landscape and Naval","Architectural and Civil Drafters","Bioengineers and Biomedical Engineers","Cartographers and Photogrammetrists","Civil Engineering Technologists and Technicians","Civil Engineers","Electrical and Electronics Drafters","Engineers, All Other","Environmental Engineers","Health and Safety Engineers, Except Mining Safety Engineers and Inspectors","Industrial Engineering Technologists and Technicians","Industrial Engineers","Landscape Architects","Marine Engineers and Naval Architects","Mechanical Drafters","Mechanical Engineers","Mining and Geological Engineers, Including Mining Safety Engineers","Statisticians"],
+    p3: ["Computer Occupations, All Other","Database Architects","Mathematical Science Occupations, All Other","Mathematicians"],
+    p4e: ["Computer Network Support Specialists","Computer Programmers","Computer Systems Analysts","Computer User Support Specialists","Computer and Information Research Scientists","Data Scientists","Database Administrators","Information Security Analysts","Network and Computer Systems Administrators","Software Developers","Software Quality Assurance Analysts and Testers","Web Developers","Web and Digital Interface Designers"]
+  },
+  oa: {
+    p1: [],
+    p2e: [],
+    p2: ["Billing and Posting Clerks","File Clerks","First-Line Supervisors of Office and Administrative Support Workers","Library Assistants, Clerical","Loan Interviewers and Clerks","Postal Service Clerks","Tellers"],
+    p3e: ["Cargo and Freight Agents","Court, Municipal, and License Clerks","Credit Authorizers, Checkers, and Clerks","Dispatchers, Except Police, Fire, and Ambulance","Eligibility Interviewers, Government Programs","Executive Secretaries and Executive Administrative Assistants","Insurance Claims and Policy Processing Clerks","Legal Secretaries and Administrative Assistants","New Accounts Clerks","Order Clerks","Payroll and Timekeeping Clerks","Production, Planning, and Expediting Clerks","Public Safety Telecommunicators","Telephone Operators"],
+    p3: ["Bill and Account Collectors","Bookkeeping, Accounting, and Auditing Clerks","Brokerage Clerks","Correspondence Clerks","Customer Service Representatives","Data Entry Keyers","Desktop Publishers","Human Resources Assistants, Except Payroll and Timekeeping","Interviewers, Except Eligibility and Loan","Medical Secretaries and Administrative Assistants","Office Clerks, General","Procurement Clerks","Proofreaders and Copy Markers","Receptionists and Information Clerks","Reservation and Transportation Ticket Agents and Travel Clerks","Secretaries and Administrative Assistants, Except Legal, Medical, and Executive","Statistical Assistants","Switchboard Operators, Including Answering Service","Word Processors and Typists"]
+  }
+};
+
+/* ============== Heatmap rendering ============== */
+(function renderHeatmap(){
+  const root = document.getElementById("heatmap");
+
+  // Find global max for color scaling
+  let max = 0;
+  for (const g of GROUPS) for (const p of PHASES) max = Math.max(max, MATRIX[g.key][p.key]);
+
+  // Color ramp: ivory -> clay-d (warm red sequential)
+  function colorFor(v){
+    if (v === 0) return "#f6f4ec";
+    const t = Math.pow(v / max, 0.75); // soften the low end
+    // interpolate between #fff5f0 and #b04020
+    const c1 = [255,245,240];
+    const c2 = [176,64,32];
+    const r = Math.round(c1[0] + (c2[0]-c1[0]) * t);
+    const g = Math.round(c1[1] + (c2[1]-c1[1]) * t);
+    const b = Math.round(c1[2] + (c2[2]-c1[2]) * t);
+    return `rgb(${r},${g},${b})`;
+  }
+  function textColorFor(v){
+    return (v / max) > 0.55 ? "#fff" : "#141413";
+  }
+
+  // top-left corner cell
+  const corner = document.createElement("div");
+  corner.className = "hm-header";
+  corner.innerHTML = "<span class='small' style='color:var(--g500)'>group / phase</span>";
+  root.appendChild(corner);
+
+  // column headers
+  for (const p of PHASES){
+    const h = document.createElement("div");
+    h.className = "hm-header";
+    h.innerHTML = `${p.label}<span class="small">${p.sub}</span>`;
+    root.appendChild(h);
+  }
+
+  // rows
+  for (const g of GROUPS){
+    const lbl = document.createElement("div");
+    lbl.className = "hm-row-label";
+    lbl.innerHTML = `<span>${g.label}</span><span class="n">N = ${g.n}</span>`;
+    root.appendChild(lbl);
+
+    for (const p of PHASES){
+      const v = MATRIX[g.key][p.key];
+      const cell = document.createElement("button");
+      cell.className = "hm-cell" + (v === 0 ? " zero" : "");
+      cell.style.background = colorFor(v);
+      cell.style.color = textColorFor(v);
+      cell.textContent = v;
+      cell.setAttribute("data-group", g.key);
+      cell.setAttribute("data-phase", p.key);
+      cell.setAttribute("aria-label",
+        `${g.label}, ${p.label.replace(/<[^>]+>/g,'')} ${p.sub}: ${v} occupations`);
+      if (v === 0) cell.setAttribute("aria-disabled", "true");
+      cell.addEventListener("click", onCellClick);
+      root.appendChild(cell);
+    }
+  }
+})();
+
+/* ============== Detail panel ============== */
+function onCellClick(ev){
+  const btn = ev.currentTarget;
+  const gKey = btn.getAttribute("data-group");
+  const pKey = btn.getAttribute("data-phase");
+
+  document.querySelectorAll(".hm-cell.active").forEach(c => c.classList.remove("active"));
+  btn.classList.add("active");
+
+  const group = GROUPS.find(x => x.key === gKey);
+  const phase = PHASES.find(x => x.key === pKey);
+  const list = OCCUPATIONS[gKey][pKey] || [];
+  const desc = PHASE_DESC[pKey];
+
+  const panel = document.getElementById("hm-detail");
+  panel.classList.remove("empty");
+
+  let html = `
+    <div class="hm-detail-head">
+      <span class="group">${group.label}</span>
+      <span class="phase-tag">${desc.name}</span>
+      <span class="count">${list.length} occupation${list.length === 1 ? "" : "s"}</span>
+    </div>
+    <p class="hm-detail-summary">${desc.blurb}</p>
+  `;
+
+  if (list.length === 0){
+    html += `<div class="none">No occupations from this group currently sit in this bucket.</div>`;
+  } else {
+    html += "<ul>" + list.map(o => `<li>${o}</li>`).join("") + "</ul>";
+  }
+
+  panel.innerHTML = html;
+}
+
+/* ============== Side-TOC active state ============== */
+(function tocActive(){
+  const links = document.querySelectorAll("nav.side-toc a");
+  if (!links.length) return;
+  const map = new Map();
+  links.forEach(a => {
+    const id = a.getAttribute("href").slice(1);
+    const el = document.getElementById(id);
+    if (el) map.set(el, a.parentElement);
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        document.querySelectorAll("nav.side-toc li.active").forEach(li => li.classList.remove("active"));
+        const li = map.get(e.target);
+        if (li) li.classList.add("active");
+      }
+    });
+  }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+  map.forEach((_, el) => io.observe(el));
+})();
+</script>
+</body>
+</html>
